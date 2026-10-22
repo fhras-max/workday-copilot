@@ -24,7 +24,8 @@ Respond professionally and concisely. Use Markdown formatting.`,
 
 const s = (v: unknown) => String(v ?? "").slice(0, 20000).trim() || "(not provided)";
 
-function buildPrompt(tool: ToolName, i: Record<string, unknown>): string {
+type Input = Partial<Record<"recipient"|"subject"|"purpose"|"keyInfo"|"outcome"|"tone"|"notes"|"tasks"|"hours"|"startDate"|"priority"|"mode"|"text", unknown>>;
+function buildPrompt(tool: ToolName, i: Input): string {
   switch (tool) {
     case "email":
       return `Generate a professional email using the following information:
@@ -103,7 +104,7 @@ export async function handleAI(request: Request): Promise<Response> {
   const apiKey = process.env.LOVABLE_API_KEY;
   if (!apiKey) return Response.json({ error: "AI is not configured." }, { status: 500 });
 
-  let body: { tool?: ToolName; input?: Record<string, unknown>; messages?: { role: string; content: string }[] };
+  let body: { tool?: ToolName; input?: Input; messages?: { role: string; content: string }[] };
   try {
     body = await request.json();
   } catch {
