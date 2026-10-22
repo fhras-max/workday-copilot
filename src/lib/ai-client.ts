@@ -8,7 +8,7 @@ export async function streamAI(req: AIRequest, onDelta: (full: string) => void, 
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(req),
-    signal,
+    signal: signal ?? null,
   });
   if (!res.ok || !res.body) {
     const data = await res.json().catch(() => ({}));
