@@ -101,7 +101,7 @@ function errorMessage(err: unknown): string {
 }
 
 export async function handleAI(request: Request): Promise<Response> {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env['LOVABLE_API_KEY'];
   if (!apiKey) return Response.json({ error: "AI is not configured." }, { status: 500 });
 
   let body: { tool?: ToolName; input?: Input; messages?: { role: string; content: string }[] };
