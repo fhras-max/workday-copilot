@@ -64,7 +64,9 @@ function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) 
 
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
-  useEffect(() => setDark(document.documentElement.classList.contains("dark")), []);
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
+  }, []);
   const toggle = () => {
     const next = !dark;
     setDark(next);

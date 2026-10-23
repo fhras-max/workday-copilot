@@ -42,7 +42,9 @@ function ChatPage() {
     }
     inputRef.current?.focus();
   }, []);
-  useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), [messages, busy]);
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [messages, busy]);
 
   const persist = (m: Msg[]) => localStorage.setItem(KEY, JSON.stringify(m));
 
